@@ -149,4 +149,6 @@
     "，": true,
     "．": true
     },
+  "git.autocommit": true,
+  "gitdoc.enabled": true
 }
