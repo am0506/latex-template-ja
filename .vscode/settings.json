@@ -150,5 +150,6 @@
     "．": true
     },
   "git.autocommit": true,
-  "gitdoc.enabled": true
+  "gitdoc.enabled": true,
+  "gitdoc.filePattern": "**/*.json",
 }
