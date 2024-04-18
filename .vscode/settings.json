@@ -1,24 +1,108 @@
 {
     "latex-workshop.latex.tools": [
         {
-            "name": "latexmk",
-            "command": "latexmk",
+            "name": "platex",
+            "command": "platex",
             "args": [
-                "%DOCFILE_EXT%"
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-kanji=utf8",
+                "-shell-escape",
+                "%DOC%"
             ]
         },
+          {
+              "name": "dvipdfmx",
+              "command": "dvipdfmx",
+              "args": [
+                  "%DOCFILE%.dvi"
+              ]
+          },
+          {
+            "name": "lualatex",
+            "command": "lualatex",
+            "args": [
+              "--cmdx",
+              "-file-line-error",
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-halt-on-error",
+              "%DOC%"
+            ],
+            "env": {}
+          },
+        {
+            "name":"move",
+            "command":"cp",
+            "args":[
+              "%DOCFILE%.pdf",
+              "out"
+            ]
+        },
+        {
+            "name":"mendex",
+            "command":"mendex",
+            "args":[
+              "-r",
+              "-c",
+              "-g",
+              "-s",
+              "dot.ist",
+              "-p",
+              "any",
+              "%DOCFILE%.idx"
+            ]
+        },
+        {
+          "name":"delete",
+          "command":"rm",
+          "args":[
+            "-f",
+            "%DOCFILE%.aux",
+            "%DOCFILE%.bbl",
+            "%DOCFILE%.blg",
+            "%DOCFILE%.dvi",
+            "%DOCFILE%.idx",
+            "%DOCFILE%.ilg",
+            "%DOCFILE%.ind",
+            "%DOCFILE%.lof",
+            "%DOCFILE%.log",
+            "%DOCFILE%.lot",
+            "%DOCFILE%.toc",
+            "%DOCFILE%.synctex.gz",
+            "%DOCFILE%.pdf",
+          ]
+      }
+
     ],
     "latex-workshop.latex.recipes": [
         {
-            "name": "compile",
+            "name": "platex",
             "tools": [
-                "latexmk",
+                "platex",
+                "dvipdfmx",
+                "platex",
+                "dvipdfmx",
+                "move",
+                "delete",
             ]
-        }
+        },
+        {
+          "name": "lualatex",
+          "tools": ["lualatex"]
+        },
+
     ],
-    "latex-workshop.latex.autoBuild.run": "never",
+
+
+
+    "latex-workshop.latex.autoBuild.onSave.enabled": true,
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
     "latex-workshop.view.pdf.viewer": "tab",
-    "latex-workshop.latex.autoClean.run": "onFailed",
+    "latex-workshop.latex.clean.onFailBuild.enabled": true,
+    "latex-workshop.latex.autoClean.run": "onBuilt",
+    "latex-workshop.latex.clean.method": "glob",
     "latex-workshop.latex.clean.fileTypes": [
         "*.aux",
         "*.bbl",
@@ -38,7 +122,7 @@
         "*.ist",
         "*.fls",
         "*.fdb_latexmk",
-        "*.synctex.gz",
+        //"*.synctex.gz",
         "_minted*",
         "*.nav",
         "*.snm",
@@ -57,5 +141,12 @@
         "./bin/linter.sh",
     ],
     "editor.wordSeparators": "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?．。，、（）「」［］｛｝《》てにをはがのともへでや",
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
+    "files.trimTrailingWhitespace": true,
+    "latex-workshop.view.pdf.zoom": "page-width",
+    "latex-workshop.latex.outDir": "out",
+    "editor.unicodeHighlight.allowedCharacters": {
+    "，": true,
+    "．": true
+    },
 }
