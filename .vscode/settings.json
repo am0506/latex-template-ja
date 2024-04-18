@@ -122,7 +122,7 @@
         "*.ist",
         "*.fls",
         "*.fdb_latexmk",
-        //"*.synctex.gz",
+        "*.synctex.gz",
         "_minted*",
         "*.nav",
         "*.snm",
