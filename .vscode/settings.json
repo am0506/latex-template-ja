@@ -149,7 +149,9 @@
     "，": true,
     "．": true
     },
-  "git.autocommit": true,
   "gitdoc.enabled": true,
-  "gitdoc.filePattern": "**/*.json",
+  "gitdoc.autoCommitDelay": 10000,
+  "gitdoc.autPull": "onPush",
+  "gitdoc.autoPush": "onCommit"
+
 }
